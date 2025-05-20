@@ -172,6 +172,7 @@ def test_model_reproducibility(sample_data, preprocessor):
         predictions1, predictions2
     ), "モデルの予測結果に再現性がありません"
 
+
 # モデルの精度を新旧で比較
 def test_model_comparison(train_model):
     """モデルの精度を新旧で比較"""
@@ -180,7 +181,7 @@ def test_model_comparison(train_model):
     current_pred = model.predict(X_test)
     current_accuracy = accuracy_score(y_test, current_pred)
 
-    #演習2で作成したモデルを読み込む
+    # 演習2で作成したモデルを読み込む
     previous_model = os.path.join(MODEL_DIR, "titanic_model_2.pkl")
     if not os.path.exists(previous_model):
         pytest.skip("演習2で作成したモデルが存在しません")
@@ -190,7 +191,9 @@ def test_model_comparison(train_model):
 
     previous_pred = previous_model.predict(X_test)
     previous_accuracy = accuracy_score(y_test, previous_pred)
-    
+
     # 新モデルの精度を計算
-    assert current_accuracy >= previous_accuracy -0.02, ("新モデルの精度が低下しています"
-    f"新モデルの精度: {current_accuracy}, 旧モデルの精度: {previous_accuracy}")
+    assert current_accuracy >= previous_accuracy - 0.02, (
+        "新モデルの精度が低下しています"
+        f"新モデルの精度: {current_accuracy}, 旧モデルの精度: {previous_accuracy}"
+    )
